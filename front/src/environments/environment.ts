@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  baseUrl: 'https://urban-waffle-r447p95575p3v5-3000.app.github.dev',
+  viaCepUrl: 'https://viacep.com.br/ws'
 };
 
 /*
