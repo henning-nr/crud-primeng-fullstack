@@ -4,12 +4,16 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require("cors")
+var { swaggerUi, swaggerSpec } = require('./swagger.js')
 require('dotenv').config()
 
 var app = express();
 app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }));
+
+// Rota do Swagger
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // IMPORTANDO ROTAS
 var indexRouter = require('./routes/index');

@@ -4,6 +4,27 @@ const bcrypt = require('bcryptjs')
 const {findUserByUsername, createUser} = require('../models/userModel')
 const router = express.Router()
 
+/**
+ * @swagger
+ * /auth/register:
+ *   post:
+ *     summary: Cria um novo usuário
+ *     tags: [Auth]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               username:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *     responses:
+ *       201:
+ *         description: Usuário criado com sucesso
+ */
 router.post('/register',(req, res)=>{
     const {username, password} = req.body
 
@@ -24,7 +45,28 @@ router.post('/register',(req, res)=>{
     })
 })
 
-// Login
+
+
+/** * @swagger
+ * /auth/login:
+ *   post:
+ *     summary: Realiza o login de um usuário
+ *     tags: [Auth]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               username:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Login bem-sucedido
+ */
 router.post('/login', (req, res) => {
   const { username, password } = req.body;
 
@@ -44,5 +86,7 @@ router.post('/login', (req, res) => {
     res.json({ message: 'Login bem-sucedido', token });
   });
 });
+
+
 
 module.exports = router;
