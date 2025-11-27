@@ -103,18 +103,17 @@ export class PetComponent implements OnInit {
 
     savePet() {
         this.submitted = true;
+        console.log("salvando pet", this.pet);
 
         if (this.pet.name?.trim()) {
             if (this.pet.id) {
                 // @ts-ignore
-                this.pet.inventoryStatus = this.pet.inventoryStatus.value ? this.pet.inventoryStatus.value : this.pet.inventoryStatus;
                 // this.pets[this.findIndexById(this.pet.id)] = this.pet;
                 this.petService.updatePet(this.pet);
                 this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Pet Updated', life: 3000 });
             } else {
                 // @ts-ignore
-                this.pet.inventoryStatus = this.pet.inventoryStatus ? this.pet.inventoryStatus.value : 'INSTOCK';
-                this.pet.idTutor = this.pet.idTutor['code'];
+                this.pet.idTutor = this.pet.id_tutor['code'];
                 this.petService.savePet(this.pet);
                 this.getPets();
                 this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Pet Created', life: 3000 });
