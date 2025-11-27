@@ -20,6 +20,10 @@ export class PetComponent implements OnInit {
 
     pet: Pet = {};
 
+    tutors: any[] = [
+        { name: 'Maria Silva', code: 1 },
+        { name: 'João Souza', code: 2 },
+    ];
     selectedPets: Pet[] = [];
 
     submitted: boolean = false;
@@ -33,11 +37,9 @@ export class PetComponent implements OnInit {
     constructor(private petService: PetService, private messageService: MessageService) { }
 
     ngOnInit() {
-        this.petService.getPets().then(data => {
-            console.log("no compoente", data) 
-            this.pets = data
-        });
-        
+
+        this.getPets();
+
         this.cols = [
             { field: 'pet', header: 'Pet' },
             { field: 'price', header: 'Price' },
@@ -51,6 +53,13 @@ export class PetComponent implements OnInit {
             { label: 'LOWSTOCK', value: 'lowstock' },
             { label: 'OUTOFSTOCK', value: 'outofstock' }
         ];
+    }
+
+    getPets() {
+        this.petService.getPets().then(data => {
+            console.log("no compoente", data)
+            this.pets = data
+        });
     }
 
     openNew() {
@@ -99,13 +108,15 @@ export class PetComponent implements OnInit {
             if (this.pet.id) {
                 // @ts-ignore
                 this.pet.inventoryStatus = this.pet.inventoryStatus.value ? this.pet.inventoryStatus.value : this.pet.inventoryStatus;
-                this.pets[this.findIndexById(this.pet.id)] = this.pet;
+                // this.pets[this.findIndexById(this.pet.id)] = this.pet;
+                this.petService.updatePet(this.pet);
                 this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Pet Updated', life: 3000 });
             } else {
-                this.pet.id = this.createId();
                 // @ts-ignore
                 this.pet.inventoryStatus = this.pet.inventoryStatus ? this.pet.inventoryStatus.value : 'INSTOCK';
-                this.pets.push(this.pet);
+                this.pet.idTutor = this.pet.idTutor['code'];
+                this.petService.savePet(this.pet);
+                this.getPets();
                 this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Pet Created', life: 3000 });
             }
 

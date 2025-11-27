@@ -13,13 +13,6 @@ export class PetService {
 
     urlApi = environment.baseUrl+"/pets"
 
-    getPetsSmall() {
-        return this.http.get<any>('assets/demo/data/products-small.json')
-            .toPromise()
-            .then(res => res.data as Pet[])
-            .then(data => data);
-    }
-
     getPets() {
         return this.http.get<any>(this.urlApi, {headers: this.headers})
             .toPromise()
@@ -29,24 +22,36 @@ export class PetService {
             })
     }
 
-    getPets2() {
-        return this.http.get<any>('assets/demo/data/pet.json')
+
+    getPetById(id: number) {
+        return this.http.get<any>(`${this.urlApi}/${id}`, {headers: this.headers})
             .toPromise()
-            .then(res => res.data as Pet[])
-            .then(data => data);
+            .then(res => {
+                return res.pet as Pet
+            })
     }
 
-    getPetsMixed() {
-        return this.http.get<any>('assets/demo/data/products-mixed.json')
+    savePet(pet: Pet) {
+        return this.http.post<any>(this.urlApi, pet, {headers: this.headers})
             .toPromise()
-            .then(res => res.data as Pet[])
-            .then(data => data);
+            .then(res => {
+                return res.pet as Pet
+            })
+    }   
+
+    deletePet(id: number) {
+        return this.http.delete<any>(`${this.urlApi}/${id}`, {headers: this.headers})
+            .toPromise()
+            .then(res => {
+                return res.success as boolean
+            })
     }
 
-    getPetsWithOrdersSmall() {
-        return this.http.get<any>('assets/demo/data/products-orders-small.json')
+    updatePet(pet: Pet) {
+        return this.http.put<any>(`${this.urlApi}/${pet.id}`, pet, {headers: this.headers})
             .toPromise()
-            .then(res => res.data as Pet[])
-            .then(data => data);
-    }
+            .then(res => {
+                return res.pet as Pet
+            })
+    }   
 }

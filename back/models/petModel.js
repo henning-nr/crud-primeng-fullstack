@@ -15,10 +15,10 @@ function getPets(callback){
 }
 
 // Criar um novo pet
-function createPet(name, gender, color, breed, callback){
+function createPet(name, gender, color, breed, idTutor, callback){
     console.log('salvando no banco', name)
     db.run(
-        'INSERT INTO pets (name, gender, color, breed) VALUES (?, ?, ?, ?)',[name, gender , color , breed ], (err)=>{
+        'INSERT INTO pets (name, gender, color, breed, id_tutor) VALUES (?, ?, ?, ?, ?)',[name, gender , color , breed, idTutor], (err)=>{
             if(err){
                 console.error('Erro ao inserir pet:', err.message)
                 return callback(err)

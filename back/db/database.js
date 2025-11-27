@@ -34,6 +34,7 @@ db.run(`
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             name TEXT,
             gender TEXT,
+            id_tutor INTEGER,
             color TEXT,
             breed TEXT
         )

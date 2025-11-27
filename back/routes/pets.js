@@ -45,10 +45,11 @@ router.post('/',authenticateToken, function(req, res, next) {
   const gender = req.body.gender
   const color = req.body.color
   const breed = req.body.breed
+  const idTutor = req.body.idTutor
 
-  console.log('veio', { name, gender, color, breed })
+  console.log('veio', { name, gender, color, breed, idTutor })
 
-  createPet(name, gender, color, breed, (err, newPet)=>{
+  createPet(name, gender, color, breed, idTutor, (err, newPet)=>{
     if(err){
       console.error('createPet erro:', err.message)
       return res.status(500).json({error: 'Erro ao salvar pet'})
