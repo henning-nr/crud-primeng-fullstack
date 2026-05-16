@@ -8,7 +8,9 @@ var { swaggerUi, swaggerSpec } = require('./swagger.js')
 require('dotenv').config()
 
 var app = express();
-app.use(cors())
+app.use(cors({
+  origin: 'https://super-duper-system-p4v44r9j7ww3qgx-4200.app.github.dev'
+}))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }));
 

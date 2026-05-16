@@ -24,6 +24,8 @@ export class CrudComponent implements OnInit {
 
     submitted: boolean = false;
 
+    alunos: any[] = [];
+
     cols: any[] = [];
 
     statuses: any[] = [];
@@ -32,8 +34,13 @@ export class CrudComponent implements OnInit {
 
     constructor(private productService: ProductService, private messageService: MessageService) { }
 
-    ngOnInit() {
-        this.productService.getProducts().then(data => this.products = data);
+   ngOnInit() {
+        // this.productService.getProducts().then(data => this.products = data);
+         this.productService.getAlunos().then(async data => {
+         this.alunos = await data
+            console.log('alunos aqui', JSON.stringify(data));
+        });
+
 
         this.cols = [
             { field: 'product', header: 'Product' },

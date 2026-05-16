@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'http://localhost:3000',
+  baseUrl: 'https://super-duper-system-p4v44r9j7ww3qgx-3000.app.github.dev',
   viaCepUrl: 'https://viacep.com.br/ws'
 };
 

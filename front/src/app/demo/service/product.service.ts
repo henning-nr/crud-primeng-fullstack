@@ -21,6 +21,11 @@ export class ProductService {
             .then(data => data);
     }
 
+    getAlunos() {
+        return this.http.get<any[]>('https://super-duper-system-p4v44r9j7ww3qgx-3000.app.github.dev/alunos')
+            .toPromise();
+    }
+
     getProductsMixed() {
         return this.http.get<any>('assets/demo/data/products-mixed.json')
             .toPromise()

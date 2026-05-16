@@ -13,6 +13,7 @@ import { IconService } from './demo/service/icon.service';
 import { NodeService } from './demo/service/node.service';
 import { PhotoService } from './demo/service/photo.service';
 import { AuthService } from './main/middleware/auth/auth.service';
+import { AuthModule } from './main/middleware/interceptors/auth.module';
 import { MessageService } from 'primeng/api';
 
 @NgModule({
@@ -21,7 +22,8 @@ import { MessageService } from 'primeng/api';
     ],
     imports: [
         AppRoutingModule,
-        AppLayoutModule
+        AppLayoutModule,
+        AuthModule
     ],
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy },
